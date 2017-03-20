@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+[自定义企业首页文档](https://yq.aliyun.com/articles/71162?spm=5176.8091938.0.0.LLs5na)
+
 ## Build Setup
 
 ``` bash
