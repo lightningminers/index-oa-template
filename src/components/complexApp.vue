@@ -41,6 +41,7 @@
         },
         methods: {
             homeGroupsOpenLink: function (item) {
+                alert(item.url);
                 if (lock){
                     lock = false;
                     var url = item.url;

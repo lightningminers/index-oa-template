@@ -2,7 +2,7 @@
   "name": "index-oa-template",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "icepy <xiangwenwe@foxmail.com>",
+  "author": "xiangwenwen <icepy.xww@alibaba-inc.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -10,10 +10,13 @@
     "weex": "node build/build-weex.js"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "lodash": "^4.17.4",
     "vue": "^2.1.10",
     "vue-router": "^2.2.0",
-    "vuex": "^2.1.2"
+    "vuex": "^2.1.2",
+    "weex-html5": "^0.4.1",
+    "weex-vue-render": "^0.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

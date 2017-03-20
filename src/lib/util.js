@@ -4,7 +4,8 @@
 
 import metaHandler from './metaHandler';
 
-var isDingtalk = /DingTalk/.test(navigator.userAgent);
+var isDingtalk = '';
+// var isDingtalk = /DingTalk/.test(navigator.userAgent);
 
 export function parseCorpId(url, param) {
     var searchIndex = url.indexOf('?');
@@ -56,6 +57,22 @@ export function openLink(url, corpId){
     } else {
         window.open(url);
     }
+}
+
+export function authCode(corpId){
+    return new Promise(function(resolve, reject){
+        dd.ready(function(){
+            dd.runtime.permission.requestAuthCode({
+                corpId: corpId,
+                onSuccess: function(result) {
+                    resolve(result);
+                },
+                onFail : function(err) {
+                    reject(err);
+                }
+            });
+        });
+    });
 }
 
 export default {

@@ -1,11 +1,11 @@
 <template>
     <div class="app-container">
         <banner v-bind:banner-metas="meta.bannerMetas" v-bind:corp-id="corpId"></banner>
-        <item v-bind:item-metas="meta.itemMetas" v-bind:corp-id="corpId"></item>
+        <!-- <item v-bind:item-metas="meta.itemMetas" v-bind:corp-id="corpId"></item>
         <admin v-bind:admin="meta.admin" v-bind:user-info="meta.userInfo" v-bind:corp-id="corpId"></admin>
         <userlist v-bind:userlist-metas="meta.userlistMetas" v-bind:corp-id="corpId"></userlist>
         <applist v-bind:allapplist-metas="meta.allapplistMetas" v-bind:corp-id="corpId"></applist>
-        <appmanager v-if="openAppManager" v-bind:admin="meta.admin" v-bind:corp-id="corpId"></appmanager>
+        <appmanager v-if="openAppManager" v-bind:admin="meta.admin" v-bind:corp-id="corpId"></appmanager> -->
     </div>
 </template>
 
@@ -18,25 +18,29 @@
         parseMicroApps
     } from '../../lib/util';
 
-    import { OPENAPIHOST } from '../../lib/env.js';
-    import dingWISDK from 'ding-web-interface-sdk';
+    import {
+        getMicroAppsRequest,
+        getUserId,
+        getUserInfoRequest,
+        jsApiOAuthRequest
+    } from '../../request';
 
+    import { APIHOST } from '../../lib/env.js';
     import banner from './components/index-banner.vue';
-    import applist from './components/index-applist.vue';
-    import item from './components/index-item.vue';
-    import admin from './components/index-admin.vue';
-    import userlist from './components/index-userlist.vue';
-    import appmanager from './components/index-appManager.vue';
-
+    // import applist from './components/index-applist.vue';
+    // import item from './components/index-item.vue';
+    // import admin from './components/index-admin.vue';
+    // import userlist from './components/index-userlist.vue';
+    // import appmanager from './components/index-appManager.vue';
     export default {
         name: 'home',
         components: {
             banner: banner,
-            applist: applist,
-            item: item,
-            admin: admin,
-            userlist: userlist,
-            appmanager: appmanager
+            // applist: applist,
+            // item: item,
+            // admin: admin,
+            // userlist: userlist,
+            // appmanager: appmanager
         },
         data: function () {
             return {
@@ -78,23 +82,17 @@
         },
         mounted:  function(){
             const self = this;
-            const originalUrl = location.href;
+            console.log('icepy',weex.config);
+            const originalUrl = weex.config.bundleUrl || weex.config.originalUrl;
+            console.log('icepy',originalUrl);
             this.corpId = parseCorpId(originalUrl, 'corpId');
             //监听userId的变化，如果有变化，立即获取用户信息
             this.$watch('userId',function(){
                 this.getUserInfo();
             });
             metaData.microApps.length = 0;
-            const signRequest = {
-                url: OPENAPIHOST + '/api/jsapi-oauth',
-                params: {
-                    href: location.href
-                }
-            };
-            
             // js-api 权限校验
-            dingWISDK.jsApiOAuth(signRequest).then(function(response){
-                // 获取开放的全部应用
+            jsApiOAuthRequest().then(function(response){
                 self.getMicroApps();
                 const meta = parseMetaData(metaData);
                 self.meta = meta;
@@ -102,35 +100,30 @@
                 // 走免登的流程
                 self.getUserId();
             }).catch(function(error){
-                alert('JS API 权限校验失败 error : ' + JSON.stringify(error));
+                alert('js api OAuth request bad：' + JSON.stringify(error));
             });
+        },
+        beforeDestroy: function () {
+
+        },
+        destroyed: function () {
+
         },
         methods: {
             getUserId: function(){
                 // 获取userid
                 const self = this;
-                const getUserIdRequest = {
-                    url: OPENAPIHOST + '/api/get-user-info'
-                }
-                dingWISDK.getUserId(getUserIdRequest, this.corpId).then(function(response){
-                    const data = response.data;
-                    self.userId = data.userid;
+                getUserId().then(function(response){
+                    self.userId = response.userid;
                 }).catch(function(error){
                     alert('获取userid error ：' + JSON.stringify(error));
                 });
             },
             getUserInfo: function(){
-                // 根据userid获取用户详细信息
+                // 根据userId获取用户详细信息
                 const self = this;
-                const getUserInfoRequest = {
-                    url: OPENAPIHOST + '/api/get',
-                    params: {
-                        userid: this.userId
-                    }
-                };
-                dingWISDK.getUserInfo(getUserInfoRequest).then(function(response){
-                    const data = response.data;
-                    self.meta.userInfo = data;
+                getUserInfoRequest(this.userId).then(function(response){
+                    self.meta.userInfo = response;
                 }).catch(function(error){
                     alert('获取用户信息 error：' + JSON.stringify(error));
                 });
@@ -138,16 +131,13 @@
             getMicroApps: function(){
                 // 获取Apps数据
                 const self = this;
-                const microAppsRequest = {
-                    url: OPENAPIHOST + '/api/get-microapp-list'
-                };
-                dingWISDK.getMicroApps(microAppsRequest).then(function(response){
+                getMicroAppsRequest().then(function(response){
                     const data = response.data;
                     if(data.errcode === 0 ){
                         self.meta.allapplistMetas = parseMicroApps(data.microAppList);
                     }
                 }).catch(function(error){
-                    alert('获取microApps error：' + JSON.stringify(error));
+                    //alert('获取microApps error：' + JSON.stringify(error));
                 });
             }
         }

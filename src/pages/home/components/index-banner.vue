@@ -35,7 +35,7 @@
 
 <style>
     .banner-slider{
-        width: 100%;
+        width: 750px;
         height: 150px;
         flex-direction: row;
         background-color: white;
@@ -43,7 +43,7 @@
         border-color: #dadada;
     }
     .banner{
-        width: 100%;
+        width: 750px;
         height: 150px;
     }
     .indicator {
@@ -56,7 +56,7 @@
         item-size: 10px;
     }
     .banner-image {
-        width: 100%;
+        width: 750px;
         height: 150px;
     }
 </style>
