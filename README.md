@@ -4,6 +4,8 @@
 
 [自定义企业首页文档](https://yq.aliyun.com/articles/71162?spm=5176.8091938.0.0.LLs5na)
 
+![](https://gw.alicdn.com/tps/TB1T.XwPVXXXXX7XpXXXXXXXXXX-720-1280.jpg)
+
 ## Build Setup
 
 ``` bash
