@@ -70,10 +70,10 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-// 'use strict';
+
 
 /**
  * Created by xiangwenwen on 2017/3/24.
@@ -401,7 +401,7 @@ var nuva = {
 
 var runtimePermission = 'runtime.permission';
 
-function permissionJsApis(cb, jsApisConfig) {
+function permissionJsApis(cb, jsApisConfig, errorCb) {
     if (!jsApisConfig) {
         cb(null);
         return;
@@ -409,11 +409,16 @@ function permissionJsApis(cb, jsApisConfig) {
     nuva.ready(function () {
         var permission = nuva.require(runtimePermission);
         var apisConf = jsApisConfig ? jsApisConfig : {};
+        var errCb = errorCb ? errorCb : null;
         apisConf.onSuccess = function (response) {
             cb(null, response);
         };
         apisConf.onFail = function (error) {
-            cb(error, null);
+            if (typeof errCb === 'function') {
+                errCb(error);
+            } else {
+                cb(error, null);
+            }
         };
         permission.requestJsApis(apisConf);
     });
@@ -469,6 +474,8 @@ function parseJsApis(jsApis) {
 
 var dingtalkJsApisConfig = null;
 var dingtalkQueue = null;
+var dingtalkErrorCb = null;
+var dingtalkInit = true;
 
 function performQueue() {
     if (dingtalkQueue && dingtalkQueue.length > 0) {
@@ -513,18 +520,33 @@ var dingtalk = {
             return;
         }
         if (dingtalk.isSync) {
-            permissionJsApis(cb, dingtalkJsApisConfig);
+            permissionJsApis(cb, dingtalkJsApisConfig, dingtalkErrorCb);
         } else {
             var bufferFunction = function bufferFunction(cb) {
                 return function () {
-                    permissionJsApis(cb, dingtalkJsApisConfig);
+                    permissionJsApis(cb, dingtalkJsApisConfig, dingtalkErrorCb);
                 };
             };
 
             dingtalkQueue && dingtalkQueue.push(bufferFunction(cb));
         }
-    }
+    },
+    error: function error(cb) {
+        if (typeof cb === 'function') {
+            dingtalkErrorCb = cb;
+        }
+    },
+    on: nuva.on,
+    off: nuva.off
 };
+
+/**
+ * 不建议如此处理，将来随时会删除，必须遵循-谁使用谁初始化谁释放的原则
+ */
+if (dingtalkInit) {
+    dingtalkInit = false;
+    dingtalk.init();
+}
 
 module.exports = dingtalk;
 //# sourceMappingURL=weex-dingtalk.js.map
@@ -585,7 +607,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var stream = weex.requireModule('stream');
 var modal = weex.requireModule('modal');
 var dingtalk = __webpack_require__(0);
-
+var env = __webpack_require__(6);
+var globalEvent = weex.requireModule('globalEvent');
+var APIHOST = env.APIHOST;
 /* harmony default export */ __webpack_exports__["default"] = {
     name: 'hello',
     data: function () {
@@ -594,7 +618,51 @@ var dingtalk = __webpack_require__(0);
         };
     },
     mounted: function () {
+        var signRequest = {
+            method: 'GET',
+            type: 'json',
+            url: APIHOST + '/api/jsapi-oauth?href=' + weex.config.originalUrl
+        };
+        console.log('wower ----', signRequest);
+        console.log('wower ----', weex.config.originalUrl);
+        stream.fetch(signRequest, function (res) {
+            if (res.ok) {
+                var data = res.data;
+                console.log('icepy --- ', data);
+            } else {
+                console.log('icepy error', res.status);
+            }
+        });
         console.log('icepy');
+        dingtalk.ready(function () {
+            var dd = dingtalk.apis;
+            // 设置导航
+            dd.biz.navigation.setTitle({
+                title: 'icepy'
+            });
+            dingtalk.on('navTitle', function () {
+                modal.toast({
+                    message: 'Hello icepy',
+                    duration: 0.3
+                });
+            });
+        });
+
+        dingtalk.ready(function () {
+            var dd = dingtalk.apis;
+            dd.biz.navigation.setLeft({
+                show: true, //控制按钮显示， true 显示， false 隐藏， 默认true
+                control: true, //是否控制点击事件，true 控制，false 不控制， 默认false
+                showIcon: false, //是否显示icon，true 显示， false 不显示，默认true； 注：具体UI以客户端为准
+                text: '回家' //控制显示文本，空字符串表示显示默认文本
+            });
+        });
+        globalEvent.addEventListener('navLeftButton', function () {
+            modal.toast({
+                message: 'Hello icepy',
+                duration: 0.3
+            });
+        });
     },
     methods: {
         getClick: function () {
@@ -673,14 +741,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Hello_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Hello_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Hello_vue__);
 
-var dingtalk = __webpack_require__(0);
-dingtalk.init();
 __WEBPACK_IMPORTED_MODULE_0__Hello_vue___default.a.el = '#app';
 new Vue(__WEBPACK_IMPORTED_MODULE_0__Hello_vue___default.a);
 
 // import Home from './pages/home/index.vue';
 // Home.el = '#app';
 // new Vue(Home);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+const APIHOST = 'http://30.27.108.54:3000';
+/* harmony export (immutable) */ __webpack_exports__["APIHOST"] = APIHOST;
+
 
 /***/ })
 /******/ ]);

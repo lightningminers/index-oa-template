@@ -1,6 +1,4 @@
 import Hello from './Hello.vue';
-var dingtalk = require('./weex-dingtalk.js');
-dingtalk.init();
 Hello.el = '#app';
 new Vue(Hello);
 
