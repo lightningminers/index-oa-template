@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <title></title>
+        <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+        <script src="https://g.alicdn.com/dingding/open-develop/1.0.0/dingtalk.js" charset="utf-8"></script>
+        <style>
+            body,div,h1,p{
+                margin: 0px;
+                padding: 0px;
+            }
+            body{
+                font-size: 14px;
+                color: #333;
+                background-color: #eee;
+            }
+        </style>
+        <link rel="stylesheet" href="./app.css">
+    </head>
+    <body>
+        <div id="app-container">
+            <div class="app-container">
+                <div class="banner-slider">
+                    <div class="banner">
+                        <img src="https://gw.alicdn.com/tps/TB1o8BqOpXXXXanXVXXXXXXXXXX-750-300.png" class="banner-image">
+                    </div>
+                </div>
+                <div class="index-item">
+                    <div class="index-item-center">
+                        <div class="index-item-con">
+                            <div class="item">
+                                <div class="item-right-line">
+                                    <div class="item-number">0</div>
+                                    <div class="item-text">待我审批</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-right-line">
+                                    <div class="item-number">0</div>
+                                    <div class="item-text">出勤人数</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-right-line">
+                                    <div class="item-number">0</div>
+                                    <div class="item-text">签到人数</div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-right-line">
+                                    <div class="item-number">0</div>
+                                    <div class="item-text">未读日志</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-admin">
+                    <div class="admin">
+                        <div class="admin-manager">
+                            <img src="" class="admin-image">
+                            <div class="admin-hello">
+
+                            </div>
+                        </div>
+                        <div class="admin-edit">编辑分组</div>
+                    </div>
+                </div>
+                <div class="index-userlist">
+                    <div class="index-userlist-item">
+                        <div class="index-title">
+                            <div class="index-text">经营数据</div>
+                        </div>
+                        <div class="grid">
+                            <div class="cell">
+                                <div class="cell-box">
+                                    <div>
+                                        <div class="cell-image-container">
+                                            <div class="cell-mount">0</div>
+                                            <div class="cell-unit"></div>
+                                            <div class="cell-app-type-container">
+                                                <div class="cell-app-type">智能报表</div>
+                                            </div>
+                                        </div>
+                                        <div class="cell-text">支付宝收入</div>
+                                        <div class="cell-tag">营业日报</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell">
+                                <div class="cell-box">
+                                    <div>
+                                        <div class="cell-image-container">
+                                            <div class="cell-mount">0</div>
+                                            <div class="cell-unit"></div>
+                                            <div class="cell-app-type-container">
+                                                <div class="cell-app-type">智能报表</div>
+                                            </div>
+                                        </div>
+                                        <div class="cell-text">日总营业额</div>
+                                        <div class="cell-tag">营业日报</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="index-userlist-line"></div>
+                    </div>
+                    <div class="index-userlist-item">
+                        <div class="index-title">
+                            <div class="index-text">门店运营</div>
+                        </div>
+                        <div class="grid">
+                            <div class="cell">
+                                <div class="cell-box"><div>
+                                    <div class="cell-image-container">
+                                        <img src="https://landray.dingtalkapps.com/alid/app/report/images/ico-png/25.png" class="cell-image">
+                                        <div class="cell-app-type-container">
+                                            <div class="cell-app-type">日志</div>
+                                        </div>
+                                    </div>
+                                    <div class="cell-text">营业日报</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div>
+                                    <div class="cell-image-container">
+                                        <img src="https://landray.dingtalkapps.com/alid/app/report/images/ico-png/24.png" class="cell-image">
+                                        <div class="cell-app-type-container">
+                                            <div class="cell-app-type">日志</div>
+                                        </div>
+                                    </div>
+                                    <div class="cell-text">门店水电煤月报</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div>
+                                    <div class="cell-image-container">
+                                        <img src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png" class="cell-image">
+                                        <div class="cell-app-type-container">
+                                            <div class="cell-app-type">审批</div>
+                                        </div>
+                                    </div>
+                                    <div class="cell-text">打折免单申请</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="index-userlist-line"></div>
+                </div>
+                <div class="index-userlist-item">
+                    <div class="index-title">
+                        <div class="index-text">巡店督导</div>
+                    </div>
+                    <div class="grid">
+                        <div class="cell">
+                            <div class="cell-box"><div>
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcrvqOszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">签到</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell">
+                        <div class="cell-box">
+                            <div>
+                                <div class="cell-image-container">
+                                    <img src="https://landray.dingtalkapps.com/alid/app/report/images/ico-png/0.png" class="cell-image">
+                                    <div class="cell-app-type-container">
+                                        <div class="cell-app-type">日志</div>
+                                    </div>
+                                </div>
+                                <div class="cell-text">巡检日报</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-userlist-line"></div>
+            </div>
+            <div class="index-userlist-item">
+                <div class="index-title">
+                    <div class="index-text">企划营销</div>
+                </div>
+                <div class="grid">
+                    <div class="cell">
+                        <div class="cell-box"><div>
+                            <div class="cell-image-container">
+                                <img src="https://gw.alicdn.com/tps/TB12R3NOXXXXXcwaXXXXXXXXXXX-102-102.png" class="cell-image">
+                                <div class="cell-app-type-container">
+                                    <div class="cell-app-type">审批</div>
+                                </div>
+                            </div>
+                            <div class="cell-text">营销活动申请</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="cell-box">
+                        <div>
+                            <div class="cell-image-container">
+                                <img src="https://gw.alicdn.com/tps/TB1Pb4eOpXXXXcGXpXXXXXXXXXX-102-102.png" class="cell-image">
+                                <div class="cell-app-type-container">
+                                    <div class="cell-app-type">审批</div>
+                                </div>
+                            </div>
+                            <div class="cell-text">宣传物料申请</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index-userlist-line"></div>
+        </div>
+        <div class="index-userlist-item">
+            <div class="index-title">
+                <div class="index-text">人力资源</div>
+            </div>
+            <div class="grid">
+                <div class="cell">
+                    <div class="cell-box">
+                        <div>
+                            <div class="cell-image-container">
+                                <img src="http://static.dingtalk.com/media/lALOcsYpu8zIzMg_200_200.png" class="cell-image">
+                            </div>
+                            <div class="cell-text">考勤打卡</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="cell-box"><div>
+                        <div class="cell-image-container">
+                            <img src="https://gw.alicdn.com/tps/TB1hcBoOpXXXXbPXXXXXXXXXXXX-102-102.png" class="cell-image">
+                            <div class="cell-app-type-container">
+                                <div class="cell-app-type">审批</div>
+                            </div>
+                        </div>
+                        <div class="cell-text">请假</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="cell-box">
+                    <div>
+                        <div class="cell-image-container">
+                            <img src="https://gw.alicdn.com/tps/TB1GCw.OXXXXXbOXFXXXXXXXXXX-102-102.png" class="cell-image">
+                            <div class="cell-app-type-container">
+                                <div class="cell-app-type">审批</div>
+                            </div>
+                        </div>
+                        <div class="cell-text">入职申请单</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="cell-box">
+                    <div>
+                        <div class="cell-image-container">
+                            <img src="https://gw.alicdn.com/tps/TB1ESwQOXXXXXbaaXXXXXXXXXXX-102-102.png" class="cell-image">
+                            <div class="cell-app-type-container">
+                                <div class="cell-app-type">审批</div>
+                            </div>
+                        </div>
+                        <div class="cell-text">离职申请单</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="cell-box">
+                    <div>
+                        <div class="cell-image-container">
+                            <img src="https://gw.alicdn.com/tps/TB1.vAMOXXXXXXmaFXXXXXXXXXX-102-102.png" class="cell-image">
+                            <div class="cell-app-type-container">
+                                <div class="cell-app-type">审批</div>
+                            </div>
+                        </div>
+                        <div class="cell-text">薪资调整申请</div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell">
+                <div class="cell-box">
+                    <div>
+                        <div class="cell-image-container">
+                            <img src="https://gw.alicdn.com/tps/TB1UEoTOXXXXXbCaXXXXXXXXXXX-102-102.png" class="cell-image">
+                            <div class="cell-app-type-container">
+                                <div class="cell-app-type">审批</div>
+                            </div>
+                        </div>
+                        <div class="cell-text">调岗申请单</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <div class="index-all-applist">
+                    <div class="applist-title">
+                        <h1 class="applist-text">全部应用</h1>
+                    </div>
+                    <div class="grid">
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcrvqOszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">签到</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsYpu8zIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">考勤打卡</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsZGkszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">日志</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsZHFszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">公告</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsZGQszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">审批</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsah9MzIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">钉邮</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsahiMzIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">钉盘</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsxZiszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">智能报表</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsajBszIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">电话会议</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcsaifMzIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">视频会议</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOjlM0h8zIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">客户管理</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOcevpQczIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">办公电话</div>
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="cell-box">
+                                <div class="cell-image-container">
+                                    <img src="http://static.dingtalk.com/media/lALOa28YQMzIzMg_200_200.png" class="cell-image">
+                                </div>
+                                <div class="cell-text">阿里商旅</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-manager">
+                    <div class="add-manager-container">
+                        <img src="https://gw.alicdn.com/tps/TB1O.peOFXXXXbvXpXXXXXXXXXX-42-42.png" class="add-manager-add-icon">
+                        <div class="add-manager-text">添加/管理</div>
+                        <img src="https://gw.alicdn.com/tps/TB12pIZOpXXXXaxXVXXXXXXXXXX-16-28.jpg" class="add-manager-more-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="./app.js" charset="utf-8"></script>
+    </body>
+</html>
