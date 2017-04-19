@@ -1,2 +1,2 @@
 
-export const APIHOST = 'http://30.27.108.54:3000';
+export const APIHOST = '';
