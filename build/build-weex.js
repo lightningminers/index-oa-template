@@ -6,7 +6,6 @@ var webpack = require('webpack');
 var chalk = require('chalk');
 var webpackConfig = require('./webpack.weex.conf');
 
-
 webpack(webpackConfig,function (err, stats) {
     if (err) {
         throw err

@@ -4,16 +4,9 @@
 import Vue from 'vue';
 import weexVueRender from 'weex-vue-render';
 weexVueRender.install(Vue);
-import App from './App';
-import router from './router';
+import Home from '../../pages/home/index.vue';
 new Vue({
   el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
+  template: '<Home/>',
+  components: { Home }
 });
-
-//
-// import Hello from './Hello.vue';
-// Hello.el = '#app';
-// new Vue(Hello);

@@ -9,7 +9,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    'vue-bundle': './src/web.entry.js'
+    'vue-bundle': './src/platforms/web/web.entry.js'
   },
   output: {
     path: config.build.assetsRoot,

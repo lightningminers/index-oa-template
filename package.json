@@ -1,20 +1,24 @@
 {
   "name": "index-oa-template",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "xiangwenwen <icepy.xww@alibaba-inc.com>",
+  "description": "A Weex and Vue.js project",
+  "author": "icepy",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "weex": "node build/build-weex.js"
+    "dev:web": "node build/dev-server.js",
+    "build:web": "npm run flow && npm run release:web",
+    "release:web": "node build/build.js",
+    "flow": "flow check",
+    "test": "",
+    "dev:weex": "NODE_ENV=develop node build/build-weex.js",
+    "build:weex": "npm run flow && npm run release:weex",
+    "release:weex": "NODE_ENV=production node build/build-weex.js",
+    "build":"npm run release:weex && npm run release:web"
   },
   "dependencies": {
-    "axios": "^0.15.3",
     "lodash": "^4.17.4",
     "vue": "^2.1.10",
-    "vue-router": "^2.2.0",
-    "vuex": "^2.1.2",
+    "weex-dingtalk": "^0.0.7",
     "weex-html5": "^0.4.1",
     "weex-vue-render": "^0.2.0"
   },
@@ -22,6 +26,7 @@
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
@@ -33,6 +38,7 @@
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.2",
     "file-loader": "^0.10.0",
+    "flow-bin": "^0.42.0",
     "friendly-errors-webpack-plugin": "^1.1.3",
     "function-bind": "^1.1.0",
     "html-webpack-plugin": "^2.28.0",

@@ -5,14 +5,44 @@
 // { "framework": "Vue" }
 
 var webpack = require('webpack');
+var path = require('path');
+var env = process.env.NODE_ENV;
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+var watch = true;
+var plugins = [];
+if (env === 'production'){
+    plugins.push(
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    );
+    plugins.push(
+        new webpack.DefinePlugin({
+          'process.env': env
+        })
+    );
+    watch = false;
+}
+
+plugins.push(
+    new webpack.BannerPlugin({
+         raw: true ,
+         banner: '// { "framework": "Vue" }\n'
+    })
+);
 
 var config = {
     entry: {
-        'vue-bundle': './src/weex.entry.js?entry=true'
+        'weex-bundle': './src/platforms/weex/weex.entry.js?entry=true'
     },
     output: {
-        path: 'dist',
-        filename: '[name].weex.js'
+        path: path.resolve(__dirname, '../dist'),
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -28,13 +58,11 @@ var config = {
             }
         ]
     },
-    plugins: [
-        new webpack.BannerPlugin({
-             raw: true ,
-             banner: '// { "framework": "Vue" }\n'
-         })
-    ],
-    watch: true
+    plugins: plugins,
+    resolve: {
+        alias: {}
+    },
+    watch: watch
 };
 
 module.exports = config;

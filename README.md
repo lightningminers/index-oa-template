@@ -1,23 +1,26 @@
-# index-oa-template
+# 企业定制首页 Weex
 
-> A Vue.js project
+### Build Setup
 
-[自定义企业首页文档](https://yq.aliyun.com/articles/71162?spm=5176.8091938.0.0.LLs5na)
-
-## Build Setup
-
-``` bash
+```bash
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# 启动 vue web dev 环境，自启服务器 at localhost:8080
+npm run dev:web
 
-# build for production with minification
+# build vue web release 环境
+npm run build:web
+
+# 启动 一个临时服务器，用于访问 weex bundle 资源
+python -m SimpleHTTPServer 8089
+
+# 启动 weex dev 环境
+npm run dev:weex
+
+# 启动 weex release 环境
+npm run build:weex
+
+# 编译可发布的Weex和Vue项目资源
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -1,0 +1,76 @@
+
+.wrapper {
+  background-color: #eee;
+  width: 750px;
+}
+.banner{
+  width: 750px;
+  margin-bottom: 17px;
+}
+.banner-image{
+  width: 750px;
+  height: 220px;
+}
+.apps-title-container{
+  width: 750px;
+  height: 45px;
+  background-color: #fff;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #eee;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #eee;
+}
+.apps-title{
+  font-size: 18px;
+  padding-left: 10px;
+  line-height: 45px;
+}
+.apps-container{
+  width:750px;
+  background-color: #fff;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.app-item{
+  width: 187.5px;
+  border-right-style: solid;
+  border-right-color: #eee;
+  border-right-width: 1px;
+  position: relative;
+  border-bottom-color: #eee;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.item-image-container{
+  position: relative;
+  margin-left: 56.25px;
+  margin-right: 56.25px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  background-color: #f8f8f8;
+}
+.item-image-radius{
+  width: 75px;
+  height: 75px;
+  border-radius: 15px;
+}
+.item-image{
+  width: 75px;
+  height: 75px;
+  border-radius: 15px;
+}
+.item-text{
+  text-align: center;
+  color: #323334;
+  font-size: 26px;
+  margin-bottom: 32px;
+}
+
+/*# sourceMappingURL=vue-bundle.9cbf4e761a082a8b3471943771e87e5d.css.map*/

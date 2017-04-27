@@ -1,155 +1,148 @@
 <template>
-    <div class="app-container">
-        <banner v-bind:banner-metas="meta.bannerMetas" v-bind:corp-id="corpId"></banner>
-        <!-- <item v-bind:item-metas="meta.itemMetas" v-bind:corp-id="corpId"></item>
-        <admin v-bind:admin="meta.admin" v-bind:user-info="meta.userInfo" v-bind:corp-id="corpId"></admin>
-        <userlist v-bind:userlist-metas="meta.userlistMetas" v-bind:corp-id="corpId"></userlist>
-        <applist v-bind:allapplist-metas="meta.allapplistMetas" v-bind:corp-id="corpId"></applist>
-        <appmanager v-if="openAppManager" v-bind:admin="meta.admin" v-bind:corp-id="corpId"></appmanager> -->
+  <div class="wrapper">
+    <div class="banner">
+      <image class="banner-image" v-bind:src="imgUrl" v-on:click="onLinkImageUrl"></image>
     </div>
-</template>
+    <div class="apps">
+      <div class="apps-title-container">
+        <text class="apps-title">Paytm Apps</text>
+      </div>
+      <div class="apps-container">
+        <div class="app-item">
+          <div class="item-image-container">
+            <div class="item-image-radius">
+              <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            </div>
 
+          </div>
+          <text class="item-text">Leave</text>
+        </div>
+        <div class="app-item">
+          <div class="item-image-container">
+            <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+          </div>
+          <text class="item-text">Reimbursement</text>
+        </div>
+        <div class="app-item">
+          <div class="item-image-container">
+            <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+          </div>
+          <text class="item-text">Daily Report</text>
+        </div>
+        <div class="app-item">
+          <div class="item-image-container">
+            <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+          </div>
+          <text class="item-text">Weekly Report</text>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 <script>
 
-    import metaData from '../../mock/meta';
-    import {
-        parseCorpId,
-        parseMetaData,
-        parseMicroApps
-    } from '../../lib/util';
-
-    import {
-        getMicroAppsRequest,
-        getUserId,
-        getUserInfoRequest,
-        jsApiOAuthRequest
-    } from '../../request';
-
-    import { APIHOST } from '../../lib/env.js';
-    import banner from './components/index-banner.vue';
-    // import applist from './components/index-applist.vue';
-    // import item from './components/index-item.vue';
-    // import admin from './components/index-admin.vue';
-    // import userlist from './components/index-userlist.vue';
-    // import appmanager from './components/index-appManager.vue';
+    import dingtalk from 'weex-dingtalk';
+    const modal = weex.requireModule('modal');
     export default {
         name: 'home',
-        components: {
-            banner: banner,
-            // applist: applist,
-            // item: item,
-            // admin: admin,
-            // userlist: userlist,
-            // appmanager: appmanager
-        },
-        data: function () {
+        data: function(){
             return {
-                openAppManager: false,
-                corpId: '',
-                userId: '',
-                meta: {
-                    admin: false,
-                    bannerMetas: {
-                        homeBannerModels: [],
-                        isHomeBannerModels: false
-                    },
-                    itemMetas: {
-                        homeHeaderModel: {},
-                        act: '',
-                        isAdminOrBoos: false,
-                        attendanceUrl: '',
-                        myTasksUrl: '',
-                        checkinsUrl: '',
-                        notReadReportUrl: '',
-                        isHomeHeaderModel: false
-                    },
-                    userlistMetas: {
-                        homeGroups: [],
-                        renderLine: 0,
-                        isHomeGroups: false
-                    },
-                    allapplistMetas: {
-                        microApps: [],
-                        isMicroApps: false,
-                        corpId: ''
-                    },
-                    h5Config: {},
-                    userInfo: {
-                        name: ''
-                    }
-                }
+              "linkUrl": "https://alimarket.m.taobao.com/markets/dingtalk/cydd?lwfrom=20161118115327653",
+              "imgUrl": "https://gw.alicdn.com/tps/TB1o8BqOpXXXXanXVXXXXXXXXXX-750-300.png"
             }
         },
-        mounted:  function(){
-            const self = this;
-            console.log('icepy',weex.config);
-            const originalUrl = weex.config.bundleUrl || weex.config.originalUrl;
-            console.log('icepy',originalUrl);
-            this.corpId = parseCorpId(originalUrl, 'corpId');
-            //监听userId的变化，如果有变化，立即获取用户信息
-            this.$watch('userId',function(){
-                this.getUserInfo();
+        mounted: function(){
+            dingtalk.ready(function(){
+                const dd = dingtalk.apis;
+                // 设置导航
+                dd.biz.navigation.setTitle({
+                    title: 'Paytm'
+                });
             });
-            metaData.microApps.length = 0;
-            // js-api 权限校验
-            jsApiOAuthRequest().then(function(response){
-                self.getMicroApps();
-                const meta = parseMetaData(metaData);
-                self.meta = meta;
-                self.openAppManager = true;
-                // 走免登的流程
-                self.getUserId();
-            }).catch(function(error){
-                alert('js api OAuth request bad：' + JSON.stringify(error));
-            });
-        },
-        beforeDestroy: function () {
-
-        },
-        destroyed: function () {
-
         },
         methods: {
-            getUserId: function(){
-                // 获取userid
-                const self = this;
-                getUserId().then(function(response){
-                    self.userId = response.userid;
-                }).catch(function(error){
-                    alert('获取userid error ：' + JSON.stringify(error));
+            onLinkImageUrl: function(){
+              const linkUrl = this.linkUrl;
+              dingtalk.ready(function(){
+                const dd = dingtalk.apis;
+                dd.biz.util.openLink({
+                  url: linkUrl
                 });
-            },
-            getUserInfo: function(){
-                // 根据userId获取用户详细信息
-                const self = this;
-                getUserInfoRequest(this.userId).then(function(response){
-                    self.meta.userInfo = response;
-                }).catch(function(error){
-                    alert('获取用户信息 error：' + JSON.stringify(error));
-                });
-            },
-            getMicroApps: function(){
-                // 获取Apps数据
-                const self = this;
-                getMicroAppsRequest().then(function(response){
-                    const data = response.data;
-                    if(data.errcode === 0 ){
-                        self.meta.allapplistMetas = parseMicroApps(data.microAppList);
-                    }
-                }).catch(function(error){
-                    //alert('获取microApps error：' + JSON.stringify(error));
-                });
+              });
             }
         }
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-    .app-container{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        overflow-y: scroll;
-    }
+  .wrapper {
+    background-color: #eee;
+    width: 750px;
+  }
+  .banner{
+    width: 750px;
+    margin-bottom: 17px;
+  }
+  .banner-image{
+    width: 750px;
+    height: 220px;
+  }
+  .apps-title-container{
+    width: 750px;
+    height: 45px;
+    background-color: #fff;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #eee;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #eee;
+  }
+  .apps-title{
+    font-size: 18px;
+    padding-left: 10px;
+    line-height: 45px;
+  }
+  .apps-container{
+    width:750px;
+    background-color: #fff;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .app-item{
+    width: 187.5px;
+    border-right-style: solid;
+    border-right-color: #eee;
+    border-right-width: 1px;
+    position: relative;
+    border-bottom-color: #eee;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+  .item-image-container{
+    position: relative;
+    margin-left: 56.25px;
+    margin-right: 56.25px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    background-color: #f8f8f8;
+  }
+  .item-image-radius{
+    width: 75px;
+    height: 75px;
+    border-radius: 15px;
+  }
+  .item-image{
+    width: 75px;
+    height: 75px;
+    border-radius: 15px;
+  }
+  .item-text{
+    text-align: center;
+    color: #323334;
+    font-size: 26px;
+    margin-bottom: 32px;
+  }
 </style>
