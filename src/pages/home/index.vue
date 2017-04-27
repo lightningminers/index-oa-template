@@ -13,25 +13,30 @@
             <div class="item-image-radius">
               <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
             </div>
-
           </div>
           <text class="item-text">Leave</text>
         </div>
         <div class="app-item">
           <div class="item-image-container">
-            <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            <div class="item-image-radius">
+              <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            </div>
           </div>
           <text class="item-text">Reimbursement</text>
         </div>
         <div class="app-item">
           <div class="item-image-container">
-            <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            <div class="item-image-radius">
+              <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            </div>
           </div>
           <text class="item-text">Daily Report</text>
         </div>
         <div class="app-item">
           <div class="item-image-container">
-            <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            <div class="item-image-radius">
+              <image class="item-image" src="https://gw.alicdn.com/tps/TB1q5U5OXXXXXXPXVXXXXXXXXXX-102-102.png"></image>
+            </div>
           </div>
           <text class="item-text">Weekly Report</text>
         </div>
