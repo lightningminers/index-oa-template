@@ -47,13 +47,70 @@
 <script>
 
     import dingtalk from 'weex-dingtalk';
+    import journey from 'weex-dingtalk-journey';
+
     const modal = weex.requireModule('modal');
+    const stream = weex.requireModule('stream');
+    const { URL } = journey;
+    const HSOT = 'http://30.27.108.99:3000/'
+
+    function jsApiOAuth(cb){
+      stream.fetch({
+        method: 'GET',
+        url: HSOT + 'api/jsapi-oauth?href='+weex.config.bundleUrl
+      },function(res){
+        if (res.ok){
+          const data = res.data;
+          cb(data);
+        }
+      });
+    }
+
+    function authCode(corpId){
+      return new Promise(function(resolve, reject){
+        dingtalk.ready(function(){
+          const dd = dingtalk.apis;
+          dd.runtime.permission.requestAuthCode({
+            corpId: corpId,
+            onSuccess: function(result) {
+              resolve(result);
+            },
+            onFail : function(err) {
+              reject(err);
+            }
+          });
+        });
+      });
+    }
+
+    function getUserId(corpId,cb){
+      authCode(corpId).then(function(result){
+        const code = result.code;
+        stream.fetch({
+          method: 'GET',
+          url: HOST + 'api/get-user-info?code='+code
+        },function(res){
+          if (res.ok){
+            const data = res.data;
+            cb(data);
+          }
+        });
+      }).catch(function(err){
+        console.log(err);
+      });
+    }
+
+    function getUserInfo(){
+      
+    }
+
     export default {
         name: 'home',
         data: function(){
             return {
               "linkUrl": "https://alimarket.m.taobao.com/markets/dingtalk/cydd?lwfrom=20161118115327653",
-              "imgUrl": "https://gw.alicdn.com/tps/TB1o8BqOpXXXXanXVXXXXXXXXXX-750-300.png"
+              "imgUrl": "https://gw.alicdn.com/tps/TB1o8BqOpXXXXanXVXXXXXXXXXX-750-300.png",
+              "userId": ""
             }
         },
         mounted: function(){
@@ -64,6 +121,23 @@
                     title: 'Paytm'
                 });
             });
+            jsApiOAuth(function(data){
+              const jsApiList = [];
+              const ddConfig = {
+                agentId: data.agentId || '',
+                corpId: data.corpId || '',
+                timeStamp: data.timeStamp || '',
+                nonceStr: data.nonceStr || '',
+                signature: data.signature || '',
+                jsApiList: jsApiList
+              }
+              dingtalk.config(config);
+            });
+            this.$watch('userId',function(){
+              this.getUserInfo(this.userId);
+            });
+            const corpId = URL.parse(weex.config.bundleUrl,'corpId')
+            getUserId()
         },
         methods: {
             onLinkImageUrl: function(){

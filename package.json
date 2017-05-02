@@ -13,12 +13,13 @@
     "dev:weex": "node build/dev-weex-server.js",
     "build:weex": "npm run flow && npm run release:weex",
     "release:weex": "NODE_ENV=production node build/build-weex.js",
-    "build":"npm run release:weex && npm run release:web"
+    "build": "npm run release:weex && npm run release:web"
   },
   "dependencies": {
     "lodash": "^4.17.4",
     "vue": "^2.1.10",
     "weex-dingtalk": "^0.0.7",
+    "weex-dingtalk-journey": "0.0.3",
     "weex-html5": "^0.4.1",
     "weex-vue-render": "^0.2.0"
   },
