@@ -34,5 +34,11 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
+  },
+  weex: {
+    env: require('./dev.env'),
+    port: 8089,
+    assetsSubDirectory: 'dist',
+    assetsPublicPath: '/'
   }
 }

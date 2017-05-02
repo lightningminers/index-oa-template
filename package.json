@@ -10,7 +10,7 @@
     "release:web": "node build/build.js",
     "flow": "flow check",
     "test": "",
-    "dev:weex": "NODE_ENV=develop node build/build-weex.js",
+    "dev:weex": "node build/dev-weex-server.js",
     "build:weex": "npm run flow && npm run release:weex",
     "release:weex": "NODE_ENV=production node build/build-weex.js",
     "build":"npm run release:weex && npm run release:web"
