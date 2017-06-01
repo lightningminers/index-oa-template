@@ -19,7 +19,7 @@
     } from '../../lib/util';
 
     import { OPENAPIHOST } from '../../lib/env.js';
-    import dingWISDK from 'ding-web-interface-sdk';
+    import dingWISDK from '../../lib/ding-web.js';
 
     import banner from './components/index-banner.vue';
     import applist from './components/index-applist.vue';
